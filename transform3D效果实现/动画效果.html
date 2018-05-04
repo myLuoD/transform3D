@@ -1,0 +1,122 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>立方体的动画效果css动画及其定位</title>  
+</head>  
+<style>  
+/*对于舞台元素*/
+.rect-wrap {
+    position: relative;
+    perspective: 1600px;
+}
+/*对于容器*/
+.container {
+    width: 800px;
+    height: 800px;
+    transform-style: preserve-3d;
+    /*设置3d空间的原点在平面中心再向Z轴移动200px的位置*/
+    transform-origin: 50% 50% 200px; 
+    margin: auto;
+}
+
+/*立方体的每个面*/
+.slide {
+    width: 400px;
+    height: 400px;
+     /*定位,使其六个面折叠在一起*/
+    position: absolute;
+    left: 200px;
+	top: 100px;
+}
+.slide img{
+	width: 100%;
+	height: 100%;	
+}
+/*前面*/
+.front{
+	background: green;
+	transform: translateZ(200px);
+}
+/*后面*/
+.back{
+	background: blue;
+	transform: translateZ(-200px);
+}
+/*左面*/
+.left{
+	background: red;
+	transform: rotateY(90deg) translateZ(-200px);
+}
+/*右面*/
+.right{
+	background: purple;
+	transform: rotateY(90deg) translateZ(200px);
+}
+/*上面*/
+.top{
+	background: black;
+	transform: rotateX(90deg) translateZ(200px);
+}
+/*下面*/
+.bottom{
+	background: orange;
+	transform: rotateX(90deg) translateZ(-200px);
+}
+/*动画效果*/
+@keyframes rotate-frame {
+    0% {
+        transform: rotateX(0deg);
+    }
+    10% {
+        transform: rotateX(90deg);
+    }
+    20%{
+    	transform: rotateX(180deg);
+    }
+    30%{
+    	transform: rotateX(270deg);
+    }
+    40%{
+    	transform: rotateY(90deg);
+    }
+    50%{
+    	transform: rotateY(180deg);
+    }
+    60%{
+    	transform: rotateY(270deg);
+    }
+    70%{
+    	transform: rotateZ(-90deg);
+    }
+    80%{
+    	transform: rotateZ(-180deg);
+    }
+   	90%{
+    	transform: rotateZ(-270deg);
+    }
+    100%{
+    	transform: rotateX(-270deg) rotateZ(90deg) rotateY(180deg);
+    }
+}
+.container{
+	transform: rotateY(3deg);
+	animation: rotate-frame 10s infinite;
+}
+</style>  
+<body>   
+ <!--舞台元素，设置perspective，让其子元素获得透视效果。-->
+<div class="rect-wrap">  
+ <!--容器，设置transform-style: preserve-3d，让其子元素在3D空间呈现-->
+    <div class="container">    
+    	 <!--立方体的六个面-->
+      	<div class="top slide"><img src="images/17.jpg" title="上面" alt="上面"/></div>
+        <div class="bottom slide"><img src="images/18.jpg" title="下面" alt="下面"/></div>
+        <div class="left slide"><img src="images/19.jpg" title="左面" alt="左面"/></div>
+        <div class="right slide"><img src="images/20.jpg" title="右面" alt="右面"/></div>
+        <div class="front slide"><img src="images/21.jpg" title="前面" alt="前面"/></div>
+        <div class="back slide"><img src="images/24.jpg" title="后面" alt="后面"/></div>
+    </div>
+</div>
+</body>  
+</html>
